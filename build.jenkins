@@ -7,6 +7,9 @@ agent {
 
     stages {
         stage('Build') {
+            agent {
+                docker { image 'jonjam13/verifytest:latest' }
+            }
             steps {
                 sh './gradlew clean build'
             }
