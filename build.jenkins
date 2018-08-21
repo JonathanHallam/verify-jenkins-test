@@ -1,6 +1,3 @@
-agent {
-    label 'verify-test'
-}
 
   pipeline {
     agent none
@@ -8,7 +5,7 @@ agent {
     stages {
         stage('Build') {
             agent {
-                docker { image 'jonjam13/verifytest:latest' }
+                label 'verify-test'
             }
             steps {
                 sh './gradlew clean build'
@@ -31,7 +28,7 @@ agent {
         stage('Publish') {
             when { branch 'master' }
             agent {
-                docker { image 'govukverify/java8:latest' }
+                label 'verify-test'
             }
             environment {
                 // Artifactory credentials
